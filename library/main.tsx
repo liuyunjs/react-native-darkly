@@ -11,50 +11,61 @@ import {
   VirtualizedList,
   SafeAreaView,
   KeyboardAvoidingView,
-  ViewProps,
-  TextProps,
-  ImageProps,
   ImageBackgroundProps,
   ScrollViewProps,
   FlatListProps,
   SectionListProps,
   VirtualizedListProps,
-  KeyboardAvoidingViewProps,
+  TouchableOpacity,
+  TouchableHighlight,
+  TouchableNativeFeedback,
+  TouchableHighlightProps,
+  ColorValue,
 } from 'react-native';
 
 import { darkly } from './darkly';
 
 export { darkly };
 
-export const DarklyView = darkly<ViewProps>(View);
-export const DarklyKeyboardAvoidingView =
-  darkly<KeyboardAvoidingViewProps>(KeyboardAvoidingView);
-export const DarklySafeAreaView = darkly<ViewProps>(SafeAreaView);
-export const DarklyText = darkly<TextProps>(Text);
-export const DarklyImage = darkly<ImageProps>(Image);
+export const DarklyView = darkly(View);
+export const DarklyKeyboardAvoidingView = darkly(KeyboardAvoidingView);
+export const DarklySafeAreaView = darkly(SafeAreaView);
+export const DarklyText = darkly(Text);
+export const DarklyImage = darkly(Image);
 export const DarklyImageBackground = darkly<
   ImageBackgroundProps,
   { darkImageStyle?: ImageStyle }
->(ImageBackground, 'imageStyle');
+>(ImageBackground, ['imageStyle']);
 
 type ContentContainerStyle = { darkContentContainerStyle?: ViewStyle };
 
 export const DarklyScrollView = darkly<ScrollViewProps, ContentContainerStyle>(
   ScrollView,
-  'contentContainerStyle',
+  ['contentContainerStyle'],
 );
 
 export const DarklyFlatList = darkly<FlatListProps<any>, ContentContainerStyle>(
   FlatList,
-  'contentContainerStyle',
+  ['contentContainerStyle'],
 );
 
 export const DarklySectionList = darkly<
   SectionListProps<any>,
   ContentContainerStyle
->(SectionList, 'contentContainerStyle');
+>(SectionList, ['contentContainerStyle']);
 
 export const DarklyVirtualizedList = darkly<
   VirtualizedListProps<any>,
   ContentContainerStyle
->(VirtualizedList, 'contentContainerStyle');
+>(VirtualizedList, ['contentContainerStyle']);
+
+export const DarklyTouchableHighlight = darkly<
+  TouchableHighlightProps,
+  {
+    darkUnderlayColor?: ColorValue;
+  }
+>(TouchableHighlight, [], ['underlayColor']);
+
+export const DarklyTouchableOpacity = darkly(TouchableOpacity);
+
+export const DarklyTouchableNativeFeedback = darkly(TouchableNativeFeedback);

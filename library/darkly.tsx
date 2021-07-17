@@ -2,16 +2,18 @@ import React from 'react';
 import { useColorScheme } from 'react-native';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 
-export function darkly<T extends {}, E = {}>(
+const getDarkKey = (key: string) =>
+  `dark${key[0].toUpperCase()}${key.slice(1)}`;
+
+export function darkly<T extends { style?: any }, E = {}>(
   Component: React.ComponentType<T>,
-  ...styleKeys: string[]
+  styleKeys: (keyof T)[] = [],
+  propKeys: (keyof T)[] = [],
 ) {
-  if (!styleKeys.includes('style')) {
-    styleKeys.push('style');
-  }
+  // @ts-ignore
+  if (!styleKeys.includes('style')) styleKeys.push('style');
   const Darkly = React.forwardRef<
     any,
-    // @ts-ignore
     T & { darkStyle?: T['style']; forceDark?: boolean } & E
   >((props: any, ref) => {
     const darklyProps: any = {};
@@ -24,12 +26,19 @@ export function darkly<T extends {}, E = {}>(
         : colorScheme === 'dark';
 
     if (isDark) {
-      styleKeys.forEach((key) => {
-        const darkKey = `dark${key[0].toUpperCase()}${key.slice(1)}`;
+      styleKeys.forEach((key: any) => {
+        const darkKey = getDarkKey(key);
 
         if (props[key] || props[darkKey]) {
           if (!darklyProps[key]) darklyProps[key] = [];
           darklyProps[key].push(props[key], props[darkKey]);
+        }
+      });
+
+      propKeys.forEach((key: any) => {
+        const darkKey = getDarkKey(key);
+        if (props[darkKey]) {
+          darklyProps[key] = props[darkKey];
         }
       });
     }

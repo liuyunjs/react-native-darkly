@@ -17,6 +17,7 @@ export function darkly<T extends React.ComponentType<any>, E = {}>(
     React.ComponentProps<T> & {
       darkStyle?: React.ComponentProps<T>['style'];
       forceDark?: boolean;
+      children?: React.ReactNode;
     } & E
   >((props: any, ref) => {
     const darklyProps: any = {};

@@ -5,16 +5,19 @@ import hoistNonReactStatics from 'hoist-non-react-statics';
 const getDarkKey = (key: string) =>
   `dark${key[0].toUpperCase()}${key.slice(1)}`;
 
-export function darkly<T extends { style?: any }, E = {}>(
-  Component: React.ComponentType<T>,
-  styleKeys: (keyof T)[] = [],
-  propKeys: (keyof T)[] = [],
+export function darkly<T extends React.ComponentType<any>, E = {}>(
+  Component: T,
+  styleKeys: (keyof React.ComponentProps<T>)[] = [],
+  propKeys: (keyof React.ComponentProps<T>)[] = [],
 ) {
   // @ts-ignore
   if (!styleKeys.includes('style')) styleKeys.push('style');
   const Darkly = React.forwardRef<
     any,
-    T & { darkStyle?: T['style']; forceDark?: boolean } & E
+    React.ComponentProps<T> & {
+      darkStyle?: React.ComponentProps<T>['style'];
+      forceDark?: boolean;
+    } & E
   >((props: any, ref) => {
     const darklyProps: any = {};
 

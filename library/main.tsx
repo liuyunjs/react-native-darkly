@@ -11,15 +11,9 @@ import {
   VirtualizedList,
   SafeAreaView,
   KeyboardAvoidingView,
-  ImageBackgroundProps,
-  ScrollViewProps,
-  FlatListProps,
-  SectionListProps,
-  VirtualizedListProps,
   TouchableOpacity,
   TouchableHighlight,
   TouchableNativeFeedback,
-  TouchableHighlightProps,
   ColorValue,
 } from 'react-native';
 
@@ -33,34 +27,34 @@ export const DarklySafeAreaView = darkly(SafeAreaView);
 export const DarklyText = darkly(Text);
 export const DarklyImage = darkly(Image);
 export const DarklyImageBackground = darkly<
-  ImageBackgroundProps,
+  typeof ImageBackground,
   { darkImageStyle?: ImageStyle }
 >(ImageBackground, ['imageStyle']);
 
 type ContentContainerStyle = { darkContentContainerStyle?: ViewStyle };
 
-export const DarklyScrollView = darkly<ScrollViewProps, ContentContainerStyle>(
-  ScrollView,
-  ['contentContainerStyle'],
-);
+export const DarklyScrollView = darkly<
+  typeof ScrollView,
+  ContentContainerStyle
+>(ScrollView, ['contentContainerStyle']);
 
-export const DarklyFlatList = darkly<FlatListProps<any>, ContentContainerStyle>(
+export const DarklyFlatList = darkly<typeof FlatList, ContentContainerStyle>(
   FlatList,
   ['contentContainerStyle'],
 );
 
 export const DarklySectionList = darkly<
-  SectionListProps<any>,
+  typeof SectionList,
   ContentContainerStyle
 >(SectionList, ['contentContainerStyle']);
 
 export const DarklyVirtualizedList = darkly<
-  VirtualizedListProps<any>,
+  typeof VirtualizedList,
   ContentContainerStyle
 >(VirtualizedList, ['contentContainerStyle']);
 
 export const DarklyTouchableHighlight = darkly<
-  TouchableHighlightProps,
+  typeof TouchableHighlight,
   {
     darkUnderlayColor?: ColorValue;
   }

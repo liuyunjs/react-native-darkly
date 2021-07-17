@@ -1,5 +1,5 @@
 {
-  "name": "react-native-darkly",
+  "name": "rn-darkly",
   "version": "0.0.1",
   "private": false,
   "main": "./dist/main.js",

@@ -5,6 +5,8 @@ import hoistNonReactStatics from 'hoist-non-react-statics';
 const getDarkKey = (key: string) =>
   `dark${key[0].toUpperCase()}${key.slice(1)}`;
 
+const useColorSchemeHook = useColorScheme || (() => 'light');
+
 export function darkly<T extends React.ComponentType<any>, E = {}>(
   Component: T,
   styleKeys: (keyof React.ComponentProps<T>)[] = [],
@@ -22,7 +24,7 @@ export function darkly<T extends React.ComponentType<any>, E = {}>(
   >((props: any, ref) => {
     const darklyProps: any = {};
 
-    const colorScheme = useColorScheme();
+    const colorScheme = useColorSchemeHook();
 
     const isDark =
       typeof props.forceDark === 'boolean'

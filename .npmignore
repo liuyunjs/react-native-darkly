@@ -17,3 +17,5 @@ node_modules
 ./.prettierrc.js
 ./.watchmanconfig
 ./library
+./tsconfig.json
+./rollup.config.js

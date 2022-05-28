@@ -2,23 +2,30 @@ import React from 'react';
 import { useColorScheme } from 'react-native';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 
-const getDarkKey = (key: string) =>
-  `dark${key[0].toUpperCase()}${key.slice(1)}`;
+const getDarkKey = (key: string) => `dark_${key}`;
 
-export function darkly<T extends React.ComponentType<any>, E = {}>(
-  Component: T,
-  styleKeys: (keyof React.ComponentProps<T>)[] = [],
-  propKeys: (keyof React.ComponentProps<T>)[] = [],
+const isStyleKey = (key: string) => /style$/i.test(key);
+
+export type DarklyProps = {
+  forceDark?: boolean;
+  children?: React.ReactNode;
+};
+
+export type AdapterProps<T extends any, U extends (keyof T)[]> = {
+  [K in U[number] as K extends keyof T
+    ? K extends string
+      ? `dark_${K}`
+      : never
+    : never]?: T[K];
+};
+
+export function darkly<Props extends any, K extends (keyof Props)[]>(
+  Component: React.ComponentType<Props>,
+  ...propKeys: K
 ) {
-  // @ts-ignore
-  if (!styleKeys.includes('style')) styleKeys.push('style');
   const Darkly = React.forwardRef<
     any,
-    React.ComponentProps<T> & {
-      darkStyle?: React.ComponentProps<T>['style'];
-      forceDark?: boolean;
-      children?: React.ReactNode;
-    } & E
+    Props & DarklyProps & AdapterProps<Props, K>
   >((props: any, ref) => {
     const darklyProps: any = {};
 
@@ -30,19 +37,20 @@ export function darkly<T extends React.ComponentType<any>, E = {}>(
         : colorScheme === 'dark';
 
     if (isDark) {
-      styleKeys.forEach((key: any) => {
-        const darkKey = getDarkKey(key);
-
-        if (props[key] || props[darkKey]) {
-          if (!darklyProps[key]) darklyProps[key] = [];
-          darklyProps[key].push(props[key], props[darkKey]);
-        }
-      });
-
       propKeys.forEach((key: any) => {
         const darkKey = getDarkKey(key);
-        if (props[darkKey]) {
-          darklyProps[key] = props[darkKey];
+
+        if (isStyleKey(key)) {
+          if (props[key] || props[darkKey]) {
+            if (!darklyProps[key]) {
+              darklyProps[key] = [];
+            }
+            darklyProps[key].push(props[key], props[darkKey]);
+          }
+        } else {
+          if (props[darkKey]) {
+            darklyProps[key] = props[darkKey];
+          }
         }
       });
     }

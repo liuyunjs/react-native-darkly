@@ -13,6 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7324670A6EDE8D028398E612 /* libPods-darkly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D918A67DB5754F710DB4513 /* libPods-darkly.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		DF7B92EF2842250F002D54FD /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B92EE2842250F002D54FD /* App.swift */; };
 		F249BC493C3D41AFD986C4DE /* libPods-darkly-darklyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7717978D4BA986D47ED50E56 /* libPods-darkly-darklyTests.a */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,8 @@
 		5DB430B4F4FBF4DC6276C198 /* Pods-darkly-darklyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-darkly-darklyTests.release.xcconfig"; path = "Target Support Files/Pods-darkly-darklyTests/Pods-darkly-darklyTests.release.xcconfig"; sourceTree = "<group>"; };
 		7717978D4BA986D47ED50E56 /* libPods-darkly-darklyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-darkly-darklyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = darkly/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DF7B92ED2842250E002D54FD /* darkly-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "darkly-Bridging-Header.h"; sourceTree = "<group>"; };
+		DF7B92EE2842250F002D54FD /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		EAF10814BB5322884297F170 /* Pods-darkly-darklyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-darkly-darklyTests.debug.xcconfig"; path = "Target Support Files/Pods-darkly-darklyTests/Pods-darkly-darklyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -92,6 +95,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				DF7B92EE2842250F002D54FD /* App.swift */,
+				DF7B92ED2842250E002D54FD /* darkly-Bridging-Header.h */,
 			);
 			name = darkly;
 			sourceTree = "<group>";
@@ -145,7 +150,6 @@
 				EAF10814BB5322884297F170 /* Pods-darkly-darklyTests.debug.xcconfig */,
 				5DB430B4F4FBF4DC6276C198 /* Pods-darkly-darklyTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -208,7 +212,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -411,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF7B92EF2842250F002D54FD /* App.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -431,6 +436,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EAF10814BB5322884297F170 /* Pods-darkly-darklyTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -458,6 +464,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5DB430B4F4FBF4DC6276C198 /* Pods-darkly-darklyTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = darklyTests/Info.plist;
@@ -498,6 +505,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = darkly;
+				SWIFT_OBJC_BRIDGING_HEADER = "darkly-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -523,6 +531,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = darkly;
+				SWIFT_OBJC_BRIDGING_HEADER = "darkly-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

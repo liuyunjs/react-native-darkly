@@ -13,6 +13,7 @@ import {
   TouchableHighlight,
   TouchableNativeFeedback,
   TextInput,
+  StatusBar,
 } from 'react-native';
 import { darkly } from './Darkly';
 import { DarklyProvider } from './DarklyProvider';
@@ -74,3 +75,5 @@ export const DarklyTextInput = darkly(
   'selectionColor',
   'underlineColorAndroid',
 );
+
+export const DarklyStatusBar = darkly(StatusBar, 'barStyle', 'backgroundColor');

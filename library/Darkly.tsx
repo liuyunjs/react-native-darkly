@@ -4,8 +4,6 @@ import { DarklyContext } from './Context';
 
 const getDarkKey = (key: string) => `dark_${key}`;
 
-const isStyleKey = (key: string) => /style$/i.test(key);
-
 export type DarklyProps = {
   forceDark?: boolean;
   children?: React.ReactNode;
@@ -35,7 +33,13 @@ export function darkly<Props extends any, K extends (keyof Props)[]>(
         propKeys.forEach((key: any) => {
           const darkKey = getDarkKey(key);
 
-          if (isStyleKey(key)) {
+          if (
+            // 检测是否以 style 结尾，大小写不论
+            /style$/i.test(key) &&
+            // 判断是对象，这里是为了排除 StatusBar 中的 barStyle，又以免某些组件 接收 barStyle 这个样式 prop
+            typeof props[key] !== 'string' &&
+            typeof props[darkKey] !== 'string'
+          ) {
             if (props[key] || props[darkKey]) {
               if (!darklyProps[key]) {
                 darklyProps[key] = [];

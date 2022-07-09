@@ -12,11 +12,13 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   TouchableNativeFeedback,
+  TextInput,
 } from 'react-native';
+import { darkly } from './Darkly';
+import { DarklyProvider } from './DarklyProvider';
+import { DarklyContext } from './Context';
 
-import { darkly } from './darkly';
-
-export { darkly };
+export { darkly, DarklyProvider, DarklyContext };
 
 const STYLE = 'style';
 const CONTENT_CONTAINER_STYLE = 'contentContainerStyle';
@@ -63,4 +65,12 @@ export const DarklyTouchableOpacity = darkly(TouchableOpacity, STYLE);
 export const DarklyTouchableNativeFeedback = darkly(
   TouchableNativeFeedback,
   STYLE,
+);
+
+export const DarklyTextInput = darkly(
+  TextInput,
+  STYLE,
+  'placeholderTextColor',
+  'selectionColor',
+  'underlineColorAndroid',
 );

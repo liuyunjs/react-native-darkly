@@ -1,31 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   DarklyText,
   DarklySafeAreaView,
   DarklyScrollView,
   DarklyTouchableHighlight,
+  DarklyProvider,
+  DarklyStatusBar,
 } from './library/main';
 
 export default function App() {
+  const [forceDark, setForceDark] = useState(false);
+
   return (
-    <DarklySafeAreaView style={{ flex: 1 }}>
+    <DarklyProvider forceDark={forceDark}>
+      <DarklyStatusBar barStyle="dark-content" dark_barStyle="light-content" />
       <DarklyScrollView
-        // style={{ flex: 1, backgroundColor: '#fafafa' }}
-        // dark_style={{ backgroundColor: '#000' }}
         contentContainerStyle={{ backgroundColor: '#fafafa', flex: 1 }}
         dark_contentContainerStyle={{ backgroundColor: '#000' }}>
-        <DarklyTouchableHighlight
-          onPress={(e) => console.log(e.nativeEvent)}
-          style={{ height: 50 }}
-          dark_underlayColor="#eee"
-          underlayColor="#000">
-          <DarklyText
-            style={{ fontSize: 20, color: '#333' }}
-            dark_style={{ color: '#fff' }}>
-            DarklyText
-          </DarklyText>
-        </DarklyTouchableHighlight>
+        <DarklySafeAreaView>
+          <DarklyTouchableHighlight
+            onPress={() => setForceDark(!forceDark)}
+            style={{ height: 50 }}
+            dark_underlayColor="#eee"
+            underlayColor="#000">
+            <DarklyText
+              style={{ fontSize: 20, color: '#333' }}
+              dark_style={{ color: '#fff' }}>
+              DarklyText
+            </DarklyText>
+          </DarklyTouchableHighlight>
+        </DarklySafeAreaView>
       </DarklyScrollView>
-    </DarklySafeAreaView>
+    </DarklyProvider>
   );
 }
